@@ -1,15 +1,23 @@
-import { VFC } from 'react'
+import { useState, useEffect, VFC } from 'react'
 import { TaskItem } from './TaskItem'
-import useQueryTasks from '../hooks/useQueryTasks'
+import { getTasks } from '../hooks/useQueryTasks'
 import { Task } from '../types/types'
 
-export const TaskList: VFC = () => {
-  const tasks = useQueryTasks()
+interface Props {
+  onClickEdit: (task: Task) => void
+}
+
+export const TaskList: VFC<Props> = ({ onClickEdit }) => {
+  const [tasks, setTasks] = useState<Task[]>([])
+
+  useEffect(() => {
+    getTasks().then(setTasks);
+  }, [])
 
   return (
     <ul>
       {tasks.map((task: Task) => (
-        <TaskItem key={task.id} task={task} />
+        <TaskItem key={task.id} task={task} onClickEdit={onClickEdit} />
       ))}
     </ul>
   )
