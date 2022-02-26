@@ -18,3 +18,7 @@ export const createTask = (taskTitle: string) => {
     }
   )
 }
+
+export const deleteTask = (taskId: number) => {
+  axios.delete(`http://127.0.0.1:8000/api/tasks/${taskId}/`)
+}

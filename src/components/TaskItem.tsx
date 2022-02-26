@@ -1,6 +1,7 @@
 import { VFC } from 'react'
 import { Task } from '../types/types'
-import { PencilAltIcon } from '@heroicons/react/solid'
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
+import { deleteTask } from '../hooks/useMutateTask'
 
 interface Props {
   task: Task
@@ -10,6 +11,12 @@ interface Props {
 export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
   const handleOnClick = () => {
     onClickEdit(task)
+  }
+
+  const handleOnClickDelete = async () => {
+    await deleteTask(task.id)
+
+    window.location.reload()
   }
 
   return (
@@ -24,6 +31,10 @@ export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
         <PencilAltIcon
           className="h-5 w-5 mx-1 text-blue-500 cursor-pointer"
           onClick={handleOnClick}
+        />
+        <TrashIcon
+          className="h-5 w-5 text-blue-500 cursor-pointer"
+          onClick={handleOnClickDelete}
         />
       </div>
     </li>
