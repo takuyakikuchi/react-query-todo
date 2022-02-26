@@ -1,22 +1,28 @@
 import { useEffect, useState, VFC } from 'react'
 import { Task } from '../types/types'
-import { editTask } from '../hooks/useMutateTask'
+import { createTask, editTask } from '../hooks/useMutateTask'
 
 interface Props {
-  task: Task
+  task: Task | null
 }
 
 export const TaskEdit: VFC<Props> = ({ task }) => {
   const [newTitle, setNewTitle] = useState<string>('')
 
   useEffect(() => {
-    setNewTitle(task.title)
-  }, [task.title])
+    if (task) {
+      setNewTitle(task.title)
+    }
+  }, [task])
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    await editTask({...task, title: newTitle})
+    if (task) {
+      await editTask({...task, title: newTitle})
+    } else {
+      await createTask(newTitle)
+    }
 
     window.location.reload()
   }
@@ -37,7 +43,7 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
         className="disabled:opacity-40 my-3 mx-3 py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded"
         disabled={false}
       >
-        Update
+        { task ? 'Update' : 'Create' }
       </button>
     </form>
   )

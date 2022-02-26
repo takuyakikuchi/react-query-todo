@@ -5,3 +5,9 @@ This is a repository for the workshop from the udemy course [High Performance Re
 
 1. Run REST server with Pycharm
 2. Start the client with `$ yarn start`
+
+## Memo
+
+### No state management libraries
+
+- 
