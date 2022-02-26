@@ -13,5 +13,5 @@ This is a repository for the workshop from the udemy course [High Performance Re
 Pains
 - To reflect the changes in the state after each actions(create, update and delete), I need to refresh the page with `window.location.reload()`.
 - When editing, the selected task needs to be watched by `useEffect` and reflected in the local state.
-
+- Prop drilling with `selectedTask` and the update function.
 
