@@ -18,7 +18,8 @@ Pains
 ### 2. Add React Query
 
 Benefits
-- 
+- States for query and mutation are handled by React Query.
+- By updating the cache, I don't have to re-fetch the latest data after each mutation.
 
 Pains
 - 

@@ -1,6 +1,6 @@
 import { useEffect, useState, VFC } from 'react'
 import { Task } from '../types/types'
-import { createTask, editTask } from '../hooks/useMutateTask'
+import { useMutateTask, editTask } from '../hooks/useMutateTask'
 
 interface Props {
   task: Task | null
@@ -8,6 +8,7 @@ interface Props {
 
 export const TaskEdit: VFC<Props> = ({ task }) => {
   const [newTitle, setNewTitle] = useState<string>('')
+  const { createTaskMutation } = useMutateTask()
 
   useEffect(() => {
     if (task) {
@@ -15,16 +16,14 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
     }
   }, [task])
 
-  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (task) {
-      await editTask({...task, title: newTitle})
+      editTask({...task, title: newTitle})
     } else {
-      await createTask(newTitle)
+      createTaskMutation.mutate(newTitle)
     }
-
-    // window.location.reload()
   }
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
