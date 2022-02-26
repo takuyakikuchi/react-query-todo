@@ -7,3 +7,14 @@ export const editTask = (task: Task) => {
     task
   )
 }
+
+export const createTask = (taskTitle: string) => {
+  axios.post(
+    `http://127.0.0.1:8000/api/tasks/`,
+    {
+      tag : 1,
+      tag_name: "Coding",
+      title: taskTitle
+    }
+  )
+}

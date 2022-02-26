@@ -15,7 +15,7 @@ export const MainTask: VFC = () => {
       <p className="mb-10 text-xl font-bold">Tasks</p>
       <div className="grid grid-cols-2 gap-40">
         <TaskList onClickEdit={handleOnClickEdit} />
-        { selectedTask && <TaskEdit task={selectedTask} /> }
+        <TaskEdit task={selectedTask} />
       </div>
     </>
   )
