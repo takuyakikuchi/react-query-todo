@@ -15,3 +15,10 @@ Pains
 - When editing, the selected task needs to be watched by `useEffect` and reflected in the local state.
 - Prop drilling with `selectedTask` and the update function.
 
+### 2. Add React Query
+
+Benefits
+- 
+
+Pains
+- 

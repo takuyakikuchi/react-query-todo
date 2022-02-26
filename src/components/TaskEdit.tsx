@@ -24,7 +24,7 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
       await createTask(newTitle)
     }
 
-    window.location.reload()
+    // window.location.reload()
   }
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
