@@ -11,15 +11,15 @@ This is a repository for the workshop from the udemy course [High Performance Re
 ### 1. CRUD without state management libraries
 
 Pains
-- To reflect the changes in the state after each actions(create, update and delete), I need to refresh the page with `window.location.reload()`.
-- When editing, the selected task needs to be watched by `useEffect` and reflected in the local state.
-- Prop drilling with `selectedTask` and the update function.
+- [x] 1. To reflect the changes in the state after each actions(create, update and delete), I need to refresh the page with `window.location.reload()`.
+- [ ] 2. When editing, the selected task needs to be watched by `useEffect` and reflected in the local state.
+- [ ] 3. Prop drilling with `selectedTask` and the update function.
 
 ### 2. Add React Query
 
 Benefits
-- States for query and mutation are handled by React Query.
-- By updating the cache, I don't have to re-fetch the latest data after each mutation.
+- Queries and mutations are centralized to React Query.
+  - The query/mutation status(loading, error...) is provided by React Query
+- Server cache is visible with React Query Dev Tools.
+- By updating the cache, data fetching can be omitted after each mutation. => Solves the pain 1
 
-Pains
-- 
