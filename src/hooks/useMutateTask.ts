@@ -2,13 +2,6 @@ import axios from 'axios'
 import { Task, MutateTaskPrams } from '../types/types'
 import { useMutation, useQueryClient } from 'react-query'
 
-const editTask = (task: MutateTaskPrams) => {
-  return axios.put(
-    `http://127.0.0.1:8000/api/tasks/${task.id}/`,
-    task
-  )
-}
-
 const createTask = (taskTitle: string) => {
   return axios.post(
     `http://127.0.0.1:8000/api/tasks/`,
@@ -18,6 +11,17 @@ const createTask = (taskTitle: string) => {
       title: taskTitle
     }
   )
+}
+
+const editTask = (task: MutateTaskPrams) => {
+  return axios.put(
+    `http://127.0.0.1:8000/api/tasks/${task.id}/`,
+    task
+  )
+}
+
+const deleteTask = (taskId: number) => {
+  return axios.delete(`http://127.0.0.1:8000/api/tasks/${taskId}/`)
 }
 
 export const useMutateTask = () => {
@@ -48,9 +52,17 @@ export const useMutateTask = () => {
     }
   })
 
-  return { createTaskMutation, editTaskMutation }
-}
+  const deleteTaskMutation = useMutation(deleteTask, {
+    // Update the cache
+    onSuccess: (res, variables) => {
+      const tasksCache = queryClient.getQueryData<Task[]>('tasks')
+      if (tasksCache?.length) {
+        queryClient.setQueryData<Task[]>('tasks', 
+          tasksCache.filter((task) => task.id !== variables),
+        )
+      }
+    }
+  })
 
-export const deleteTask = (taskId: number) => {
-  axios.delete(`http://127.0.0.1:8000/api/tasks/${taskId}/`)
+  return { createTaskMutation, editTaskMutation, deleteTaskMutation }
 }

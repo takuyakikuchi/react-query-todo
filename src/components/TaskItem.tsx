@@ -1,7 +1,7 @@
 import { VFC } from 'react'
 import { Task } from '../types/types'
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
-import { deleteTask } from '../hooks/useMutateTask'
+import { useMutateTask } from '../hooks/useMutateTask'
 
 interface Props {
   task: Task
@@ -9,15 +9,7 @@ interface Props {
 }
 
 export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
-  const handleOnClick = () => {
-    onClickEdit(task)
-  }
-
-  const handleOnClickDelete = async () => {
-    await deleteTask(task.id)
-
-    window.location.reload()
-  }
+  const { deleteTaskMutation } = useMutateTask()
 
   console.log('rendered TaskItem')
   return (
@@ -31,11 +23,11 @@ export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
       <div className="flex float-right ml-20">
         <PencilAltIcon
           className="h-5 w-5 mx-1 text-blue-500 cursor-pointer"
-          onClick={handleOnClick}
+          onClick={() => onClickEdit(task)}
         />
         <TrashIcon
           className="h-5 w-5 text-blue-500 cursor-pointer"
-          onClick={handleOnClickDelete}
+          onClick={() => deleteTaskMutation.mutate(task.id)}
         />
       </div>
     </li>
