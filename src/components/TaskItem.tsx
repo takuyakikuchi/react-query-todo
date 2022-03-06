@@ -19,6 +19,7 @@ export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
     window.location.reload()
   }
 
+  console.log('rendered TaskItem')
   return (
     <li className="my-3">
       <span className="font-bold">{task.title}</span>

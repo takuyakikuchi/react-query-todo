@@ -14,6 +14,7 @@ export const TaskList: VFC<Props> = ({ onClickEdit }) => {
     getTasks().then(setTasks);
   }, [])
 
+  console.log('rendered TagList')
   return (
     <ul>
       {tasks.map((task: Task) => (

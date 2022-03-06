@@ -10,6 +10,7 @@ export const MainTask: VFC = () => {
     setSelectedTask(task)
   }
 
+  console.log('rendered MainTask')
   return (
     <>
       <p className="mb-10 text-xl font-bold">Tasks</p>

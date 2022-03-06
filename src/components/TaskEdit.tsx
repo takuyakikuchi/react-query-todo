@@ -31,6 +31,7 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
     setNewTitle(e.target.value)
   }
 
+  console.log('rendered TaskEdit')
   return (
     <form onSubmit={handleOnSubmit}>
       <input
