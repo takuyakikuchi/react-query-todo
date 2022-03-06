@@ -6,3 +6,9 @@ export interface Task {
   created_at: string
   updated_at: string
 }
+
+export interface MutateTaskPrams {
+  id: number
+  title: string
+  tag: number
+}

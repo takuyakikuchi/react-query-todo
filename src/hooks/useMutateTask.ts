@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { Task } from '../types/types'
+import { Task, MutateTaskPrams } from '../types/types'
 import { useMutation, useQueryClient } from 'react-query'
 
-export const editTask = (task: Task) => {
-  axios.put(
+const editTask = (task: MutateTaskPrams) => {
+  return axios.put(
     `http://127.0.0.1:8000/api/tasks/${task.id}/`,
     task
   )
@@ -27,7 +27,7 @@ export const useMutateTask = () => {
     // Update the cache
     onSuccess: (res) => {
       const tasksCache = queryClient.getQueryData<Task[]>('tasks')
-      if (tasksCache) {
+      if (tasksCache?.length) {
         queryClient.setQueryData<Task[]>('tasks', [
           ...tasksCache,
           res.data,
@@ -36,7 +36,19 @@ export const useMutateTask = () => {
     }
   })
 
-  return { createTaskMutation }
+  const editTaskMutation = useMutation(editTask, {
+    // Update the cache
+    onSuccess: (res, variables) => {
+      const tasksCache = queryClient.getQueryData<Task[]>('tasks')
+      if (tasksCache?.length) {
+        queryClient.setQueryData<Task[]>('tasks', 
+          tasksCache.map((task) => task.id === variables.id ? res.data : task),
+        )
+      }
+    }
+  })
+
+  return { createTaskMutation, editTaskMutation }
 }
 
 export const deleteTask = (taskId: number) => {

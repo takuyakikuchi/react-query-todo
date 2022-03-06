@@ -1,6 +1,6 @@
 import { useEffect, useState, VFC } from 'react'
 import { Task } from '../types/types'
-import { useMutateTask, editTask } from '../hooks/useMutateTask'
+import { useMutateTask } from '../hooks/useMutateTask'
 
 interface Props {
   task: Task | null
@@ -8,7 +8,7 @@ interface Props {
 
 export const TaskEdit: VFC<Props> = ({ task }) => {
   const [newTitle, setNewTitle] = useState<string>('')
-  const { createTaskMutation } = useMutateTask()
+  const { createTaskMutation, editTaskMutation } = useMutateTask()
 
   useEffect(() => {
     if (task) {
@@ -20,7 +20,7 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
     e.preventDefault()
 
     if (task) {
-      editTask({...task, title: newTitle})
+      editTaskMutation.mutate({...task, title: newTitle})
     } else {
       createTaskMutation.mutate(newTitle)
     }
