@@ -29,3 +29,4 @@ Benefits
 
 Benefits
 - Prop drilling can be avoided.
+  - Re-rendering happens only on the relevant components.
