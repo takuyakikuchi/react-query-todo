@@ -13,9 +13,10 @@ This is a repository for the workshop from the udemy course [High Performance Re
 Pains
 - [x] 1. To reflect the changes in the state after each actions(create, update and delete), I need to refresh the page with `window.location.reload()`.
 - [ ] 2. When editing, the selected task needs to be watched by `useEffect` and reflected in the local state.
-- [ ] 3. Prop drilling with `selectedTask` and the update function.
+- [x] 3. Prop drilling with `selectedTask` and the update function.
 
 ### 2. Add React Query
+[React Query - Hooks for fetching, caching and updating asynchronous data in React](https://react-query.tanstack.com/)
 
 Benefits
 - Queries and mutations are centralized to React Query.
@@ -23,3 +24,8 @@ Benefits
 - Server cache is visible with React Query Dev Tools.
 - By updating the cache, data fetching can be omitted after each mutation. => Solves the pain 1
 
+### 3. Add Redux Toolkit
+[Redux Toolkit | Redux Toolkit](https://redux-toolkit.js.org/)
+
+Benefits
+- Prop drilling can be avoided.
