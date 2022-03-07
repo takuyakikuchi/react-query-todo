@@ -1,15 +1,17 @@
 import { VFC } from 'react'
+import { useDispatch } from 'react-redux'
 import { Task } from '../types/types'
 import { PencilAltIcon, TrashIcon } from '@heroicons/react/solid'
 import { useMutateTask } from '../hooks/useMutateTask'
+import { setSelectedTask } from '../slices/todoSlice'
 
 interface Props {
   task: Task
-  onClickEdit: (task: Task) => void
 }
 
-export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
+export const TaskItem: VFC<Props> = ({ task }) => {
   const { deleteTaskMutation } = useMutateTask()
+  const dispatch = useDispatch()
 
   console.log('rendered TaskItem')
   return (
@@ -23,7 +25,7 @@ export const TaskItem: VFC<Props> = ({ task, onClickEdit }) => {
       <div className="flex float-right ml-20">
         <PencilAltIcon
           className="h-5 w-5 mx-1 text-blue-500 cursor-pointer"
-          onClick={() => onClickEdit(task)}
+          onClick={() => dispatch(setSelectedTask(task))}
         />
         <TrashIcon
           className="h-5 w-5 text-blue-500 cursor-pointer"

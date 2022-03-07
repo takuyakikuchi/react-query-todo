@@ -2,13 +2,13 @@ import axios from 'axios'
 import { Task, MutateTaskPrams } from '../types/types'
 import { useMutation, useQueryClient } from 'react-query'
 
-const createTask = (taskTitle: string) => {
+const createTask = (title: string) => {
   return axios.post(
     `http://127.0.0.1:8000/api/tasks/`,
     {
       tag : 1,
       tag_name: "Coding",
-      title: taskTitle
+      title,
     }
   )
 }

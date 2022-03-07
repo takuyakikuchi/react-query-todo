@@ -1,33 +1,32 @@
-import { useEffect, useState, VFC } from 'react'
-import { Task } from '../types/types'
+import { VFC, useState, useEffect } from 'react'
+import { useAppSelector } from '../app/hooks'
+import { selectedTask } from '../slices/todoSlice'
 import { useMutateTask } from '../hooks/useMutateTask'
 
-interface Props {
-  task: Task | null
-}
+export const TaskEdit: VFC = () => {
+  const selectedTaskOnEdit = useAppSelector(selectedTask)
+  const [titleInput, setTitleInput] = useState<string>('')
 
-export const TaskEdit: VFC<Props> = ({ task }) => {
-  const [newTitle, setNewTitle] = useState<string>('')
   const { createTaskMutation, editTaskMutation } = useMutateTask()
 
   useEffect(() => {
-    if (task) {
-      setNewTitle(task.title)
+    if (selectedTaskOnEdit) {
+      setTitleInput(selectedTaskOnEdit.title)
     }
-  }, [task])
+  }, [selectedTaskOnEdit])
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (task) {
-      editTaskMutation.mutate({...task, title: newTitle})
+    if (selectedTaskOnEdit) {
+      editTaskMutation.mutate({...selectedTaskOnEdit, title: titleInput})
     } else {
-      createTaskMutation.mutate(newTitle)
+      createTaskMutation.mutate(titleInput)
     }
   }
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewTitle(e.target.value)
+    setTitleInput(e.target.value)
   }
 
   console.log('rendered TaskEdit')
@@ -37,13 +36,13 @@ export const TaskEdit: VFC<Props> = ({ task }) => {
         className="mb-3 px-3 py-2 border border-gray-300"
         type="text"
         onChange={handleOnChange}
-        value={newTitle}
+        value={titleInput}
       />
       <button
         className="disabled:opacity-40 my-3 mx-3 py-2 px-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded"
         disabled={false}
       >
-        { task ? 'Update' : 'Create' }
+        { selectedTaskOnEdit ? 'Update' : 'Create' }
       </button>
     </form>
   )
