@@ -1,9 +1,9 @@
-import { VFC, useState, useEffect } from 'react'
+import { VFC, useState, useEffect, memo } from 'react'
 import { useAppSelector } from '../app/hooks'
 import { selectedTask } from '../slices/todoSlice'
 import { useMutateTask } from '../hooks/useMutateTask'
 
-export const TaskEdit: VFC = () => {
+const TaskEdit: VFC = () => {
   const selectedTaskOnEdit = useAppSelector(selectedTask)
   const [titleInput, setTitleInput] = useState<string>('')
 
@@ -47,3 +47,5 @@ export const TaskEdit: VFC = () => {
     </form>
   )
 }
+
+export const TaskEditMemo = memo(TaskEdit)

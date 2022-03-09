@@ -30,3 +30,12 @@ Benefits
 Benefits
 - Prop drilling can be avoided.
   - Re-rendering happens only on the relevant components.
+
+### 4. Memoize
+
+Benefits
+- Reduce the number of re-rendering
+
+Disadvantages
+- It can be verbose.
+- 

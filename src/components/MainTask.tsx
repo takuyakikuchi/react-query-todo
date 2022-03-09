@@ -1,6 +1,6 @@
 import { VFC, useState } from "react"
-import { TaskList } from "./TaskList"
-import { TaskEdit } from "./TaskEdit"
+import { TaskListMemo } from "./TaskList"
+import { TaskEditMemo } from "./TaskEdit"
 
 export const MainTask: VFC = () => {
   const [text, setText] = useState('');
@@ -17,8 +17,8 @@ export const MainTask: VFC = () => {
       />
       <p className="mb-10 text-xl font-bold">Tasks</p>
       <div className="grid grid-cols-2 gap-40">
-        <TaskList />
-        <TaskEdit />
+        <TaskListMemo />
+        <TaskEditMemo />
       </div>
     </>
   )

@@ -1,9 +1,9 @@
-import { VFC } from 'react'
+import { VFC, memo } from 'react'
 import { TaskItem } from './TaskItem'
 import { useQueryTasks } from '../hooks/useQueryTasks'
 import { Task } from '../types/types'
 
-export const TaskList: VFC = () => {
+const TaskList: VFC = () => {
   const {isLoading, isError, data: tasks, error} = useQueryTasks()
 
   console.log('rendered TaskList')
@@ -17,3 +17,5 @@ export const TaskList: VFC = () => {
     </ul>
   )
 }
+
+export const TaskListMemo = memo(TaskList)
